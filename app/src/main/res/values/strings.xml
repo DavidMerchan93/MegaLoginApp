@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">MegaLoginApp</string>
+
+    <!-- Login -->
+    <string name="login.title.success_login">Bienvenido de vuelta</string>
+    <string name="login.button.login">Iniciar sesion</string>
+    <string name="login.button.register">¿No tienes una cuenta?, Registrate</string>
+    <string name="login.button.forgot_password">Olvide mi contraseña</string>
+    <string name="login.hint.email">Correo</string>
+    <string name="login.hint.password">Contraseña</string>
+    <string name="login.error.title.user_not_found">Usuario no encontrado</string>
+    <string name="login.error.message.user_not_found">Lo sentimos, este usuario no se encuentra registrado, deseas crear una cuenta?</string>
+
+    <!-- Register -->
+    <string name="register.title.welcome">Bienvenido a bordo!!!</string>
+    <string name="register.button.register">Registrarme</string>
+    <string name="register.hint.full_name">Nombre completo</string>
+    <string name="register.hint.email">Correo electronico</string>
+    <string name="register.hint.password">Contraseña</string>
+    <string name="register.hint.repeat_password">Repetir contraseña</string>
+    <string name="register.message.required_field">Los campos marcados con * son obligatorios.</string>
+    <string name="register.error.require_name">Debes ingresar un nombre</string>
+    <string name="register.error.require_email">Debes ingresar un correo</string>
+    <string name="register.error.require_password">Debes ingresar una contraseña</string>
+    <string name="register.error.password_not_match">Las contraseñas no coinciden</string>
+
+    <!-- Home -->
+    <string name="home.title.welcome">Hola!!!, Felicitaciones por llegar hasta acá.</string>
+
 </resources>

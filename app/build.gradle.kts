@@ -58,6 +58,7 @@ android {
 
 dependencies {
     val roomVersion = "2.4.2"
+    val exoplayerVersion = "2.19.0"
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.44")
@@ -72,6 +73,14 @@ dependencies {
     // Navigation
     implementation("androidx.navigation:navigation-compose:2.6.0")
 
+    // Lottie Animation
+    implementation("com.airbnb.android:lottie-compose:4.2.0")
+
+    // Exoplayer
+    implementation("androidx.media3:media3-exoplayer:1.1.0")
+    implementation("androidx.media3:media3-ui:1.1.0")
+
+    implementation("com.google.accompanist:accompanist-insets:0.23.1")
     implementation("androidx.core:core-ktx:1.10.1")
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
