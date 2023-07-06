@@ -8,13 +8,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -25,6 +25,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.david.megaloginapp.R
 import com.david.megaloginapp.presentation.view.common.InputType
 import com.david.megaloginapp.presentation.view.common.SimpleButton
@@ -33,17 +34,28 @@ import com.david.megaloginapp.presentation.view.common.ViewAnimation
 import com.david.megaloginapp.presentation.view.common.buildExoplayer
 import com.david.megaloginapp.presentation.view.common.buildPlayerView
 import com.david.megaloginapp.presentation.view.common.getVideoUri
+import com.david.megaloginapp.presentation.viewModel.LoginViewModel
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.navigationBarsWithImePadding
 
 @Composable
 fun LoginScreen(
-    onLogin: (userName: String) -> Unit,
+    onLogin: (id: Int) -> Unit,
     onForgotPassword: () -> Unit,
     onRegister: () -> Unit,
+    loginViewModel: LoginViewModel = hiltViewModel(),
 ) {
+    val loginState = loginViewModel.loginState
+
     val context = LocalContext.current
     val exoplayer = remember { context.buildExoplayer(context.getVideoUri()) }
+
+    var emailValue by remember { mutableStateOf("") }
+    var passwordValue by remember { mutableStateOf("") }
+
+    if (loginState.userLoggedSuccess != null) {
+        onLogin(loginState.userLoggedSuccess.id)
+    }
 
     DisposableEffect(
         AndroidView(factory = {
@@ -78,12 +90,22 @@ fun LoginScreen(
                 modifier = Modifier.fillMaxWidth()
                     .height(dimensionResource(id = R.dimen.dimen_40dp)),
             )
-            TextInput(InputType.Email)
-            TextInput(InputType.Password)
+            TextInput(
+                value = emailValue,
+                inputType = InputType.Email,
+                messageError = loginState.errorInvalidEmail?.message,
+                onChangeValue = { emailValue = it },
+            )
+            TextInput(
+                value = passwordValue,
+                inputType = InputType.Password,
+                messageError = loginState.errorEmptyPassword?.message,
+                onChangeValue = { passwordValue = it },
+            )
             SimpleButton(
                 label = stringResource(id = R.string.login_button_login),
                 onClick = {
-                    onLogin("David")
+                    loginViewModel.login(emailValue, passwordValue)
                 },
             )
             Text(

@@ -26,17 +26,17 @@ sealed class NavigationRoutes(
         baseRoute = HOME_PATH,
         navArgs = listOf(NavigationArgs.USER_NAME),
     ) {
-        fun createRoute(name: String): String {
+        fun createRoute(id: Int): String {
             return listOf(
                 baseRoute,
-                name,
+                id,
             ).joinToString("/")
         }
     }
 }
 
 enum class NavigationArgs(val key: String, val type: NavType<*> = NavType.StringType) {
-    USER_NAME("userName"),
+    USER_NAME("userId", NavType.IntType),
 }
 
 private const val LOGIN_PATH = "login"

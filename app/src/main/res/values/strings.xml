@@ -8,6 +8,8 @@
     <string name="login.button.forgot_password">Olvide mi contraseña</string>
     <string name="login.hint.email">Correo</string>
     <string name="login.hint.password">Contraseña</string>
+    <string name="login.error.invalid_email">Ingresa un correo electronico valido.</string>
+    <string name="login.error.invalid_password">Ingresa una contraseña valida.</string>
     <string name="login.error.title.user_not_found">Usuario no encontrado</string>
     <string name="login.error.message.user_not_found">Lo sentimos, este usuario no se encuentra registrado, deseas crear una cuenta?</string>
 
