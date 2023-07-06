@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class OnLoginUserUseCase @Inject constructor(
+class OnLoginUseCase @Inject constructor(
     private val loginRepository: LoginRepository,
 ) {
     operator fun invoke(email: String, password: String): Flow<User> = flow {

@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.david.megaloginapp.domain.useCase.OnLoginUserUseCase
+import com.david.megaloginapp.domain.useCase.OnLoginUseCase
 import com.david.megaloginapp.presentation.state.LoginState
 import com.david.megaloginapp.presentation.view.common.isValidEmail
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val onLoginUserUseCase: OnLoginUserUseCase,
+    private val onLoginUseCase: OnLoginUseCase,
 ) : ViewModel() {
     var loginState by mutableStateOf(LoginState())
         private set
@@ -27,7 +27,7 @@ class LoginViewModel @Inject constructor(
         loginState = LoginState(isLoading = true)
 
         if (isValidFields(email, password)) {
-            onLoginUserUseCase(email, password).catch {
+            onLoginUseCase(email, password).catch {
                 loginState = LoginState(errorUserNotFound = LoginState.LoginErrors.USER_NOT_FOUND)
             }.map { user ->
                 loginState = LoginState(userLoggedSuccess = user)

@@ -92,14 +92,14 @@ fun LoginScreen(
             )
             TextInput(
                 value = emailValue,
-                inputType = InputType.Email,
+                inputType = InputType.Email(),
                 messageError = loginState.errorInvalidEmail?.message,
                 isEnabled = loginState.isLoading.not(),
                 onChangeValue = { emailValue = it },
             )
             TextInput(
                 value = passwordValue,
-                inputType = InputType.Password,
+                inputType = InputType.Password(),
                 messageError = loginState.errorEmptyPassword?.message,
                 isEnabled = loginState.isLoading.not(),
                 onChangeValue = { passwordValue = it },
