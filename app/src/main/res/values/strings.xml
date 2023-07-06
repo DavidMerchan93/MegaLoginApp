@@ -47,8 +47,9 @@
     <string name="forgot_password.message.success_change_password">Cambio realizado con exíto.</string>
 
     <!-- Home -->
-    <string name="home.title.welcome">Hola!!!, Felicitaciones por llegar hasta acá.</string>
+    <string name="home.title.welcome">Hola %1$s!!!, Felicitaciones por llegar hasta acá.</string>
     <string name="home.button.logout">Cerrar sesión</string>
+    <string name="home.message.loading">Cargando información ...</string>
 
     <!-- General -->
     <string name="button.ok">Entendido</string>

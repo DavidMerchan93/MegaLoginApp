@@ -2,10 +2,12 @@ package com.david.megaloginapp.di
 
 import com.david.megaloginapp.data.local.dao.UserDao
 import com.david.megaloginapp.data.repository.ForgotPasswordRepositoryImpl
+import com.david.megaloginapp.data.repository.HomeRepositoryImpl
 import com.david.megaloginapp.data.repository.LoginRepositoryImpl
 import com.david.megaloginapp.data.repository.RegisterRepositoryImpl
 import com.david.megaloginapp.data.repository.StartAppRepositoryImpl
 import com.david.megaloginapp.domain.repository.ForgotPasswordRepository
+import com.david.megaloginapp.domain.repository.HomeRepository
 import com.david.megaloginapp.domain.repository.LoginRepository
 import com.david.megaloginapp.domain.repository.RegisterRepository
 import com.david.megaloginapp.domain.repository.StartAppRepository
@@ -31,4 +33,8 @@ object RepositoryModule {
     @Provides
     fun provideStartAppRepository(userDao: UserDao): StartAppRepository =
         StartAppRepositoryImpl(userDao)
+
+    @Provides
+    fun provideHomeRepository(userDao: UserDao): HomeRepository =
+        HomeRepositoryImpl(userDao)
 }

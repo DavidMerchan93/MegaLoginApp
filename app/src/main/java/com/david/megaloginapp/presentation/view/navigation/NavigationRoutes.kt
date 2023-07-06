@@ -25,7 +25,7 @@ sealed class NavigationRoutes(
     object ForgotPassword : NavigationRoutes(baseRoute = FORGOT_PASSWORD_PATH)
     object Home : NavigationRoutes(
         baseRoute = HOME_PATH,
-        navArgs = listOf(NavigationArgs.USER_NAME),
+        navArgs = listOf(NavigationArgs.USER_ID),
     ) {
         fun createRoute(id: Int): String {
             return listOf(
@@ -37,7 +37,7 @@ sealed class NavigationRoutes(
 }
 
 enum class NavigationArgs(val key: String, val type: NavType<*> = NavType.StringType) {
-    USER_NAME("userId", NavType.IntType),
+    USER_ID("userId", NavType.IntType),
 }
 
 private const val SPLASH_SCREEN_PATH = "splashScreen"

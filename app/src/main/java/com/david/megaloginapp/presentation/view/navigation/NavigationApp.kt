@@ -78,7 +78,12 @@ private fun NavGraphBuilder.forgotPasswordNavigation(navController: NavControlle
 
 private fun NavGraphBuilder.homeNavigation(navController: NavController) {
     composable(NavigationRoutes.Home) {
-        HomeScreen()
+        HomeScreen(
+            onLogout = {
+                navController.popBackStack()
+                navController.navigate(NavigationRoutes.Login.baseRoute)
+            },
+        )
     }
 }
 
