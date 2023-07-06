@@ -19,6 +19,7 @@ sealed class NavigationRoutes(
         }
     }
 
+    object SplashScreen : NavigationRoutes(baseRoute = SPLASH_SCREEN_PATH)
     object Login : NavigationRoutes(baseRoute = LOGIN_PATH)
     object Register : NavigationRoutes(baseRoute = REGISTER_PATH)
     object ForgotPassword : NavigationRoutes(baseRoute = FORGOT_PASSWORD_PATH)
@@ -39,6 +40,7 @@ enum class NavigationArgs(val key: String, val type: NavType<*> = NavType.String
     USER_NAME("userId", NavType.IntType),
 }
 
+private const val SPLASH_SCREEN_PATH = "splashScreen"
 private const val LOGIN_PATH = "login"
 private const val REGISTER_PATH = "register"
 private const val FORGOT_PASSWORD_PATH = "forgotPassword"

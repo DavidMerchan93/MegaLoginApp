@@ -7,15 +7,19 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navigation
 import com.david.megaloginapp.presentation.view.screen.ForgotPasswordScreen
 import com.david.megaloginapp.presentation.view.screen.HomeScreen
 import com.david.megaloginapp.presentation.view.screen.LoginScreen
 import com.david.megaloginapp.presentation.view.screen.RegisterScreen
+import com.david.megaloginapp.presentation.view.screen.SplashScreen
 
 @Composable
 fun NavigationApp(navHostController: NavHostController) {
-    NavHost(navController = navHostController, startDestination = NavigationRoutes.Login.route) {
+    NavHost(
+        navController = navHostController,
+        startDestination = NavigationRoutes.SplashScreen.route,
+    ) {
+        splashNavigation(navHostController)
         loginNavigation(navHostController)
         registerNavigation(navHostController)
         forgotPasswordNavigation(navHostController)
@@ -23,11 +27,27 @@ fun NavigationApp(navHostController: NavHostController) {
     }
 }
 
+private fun NavGraphBuilder.splashNavigation(navController: NavController) {
+    composable(NavigationRoutes.SplashScreen) {
+        SplashScreen(
+            navigateToHome = { userId ->
+                navController.popBackStack()
+                navController.navigate(NavigationRoutes.Home.createRoute(userId))
+            },
+            navigateToLogin = {
+                navController.popBackStack()
+                navController.navigate(NavigationRoutes.Login.baseRoute)
+            },
+        )
+    }
+}
+
 private fun NavGraphBuilder.loginNavigation(navController: NavController) {
     composable(NavigationRoutes.Login) {
         LoginScreen(
-            onLogin = { userName ->
-                navController.navigate(NavigationRoutes.Home.createRoute(userName))
+            onLogin = { userId ->
+                navController.popBackStack()
+                navController.navigate(NavigationRoutes.Home.createRoute(userId))
             },
             onForgotPassword = {
                 navController.navigate(NavigationRoutes.ForgotPassword.baseRoute)
@@ -43,6 +63,7 @@ private fun NavGraphBuilder.registerNavigation(navController: NavController) {
     composable(NavigationRoutes.Register) {
         RegisterScreen(
             onContinueToHome = { userId ->
+                navController.popBackStack()
                 navController.navigate(NavigationRoutes.Home.createRoute(userId))
             },
         )

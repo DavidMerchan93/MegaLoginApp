@@ -11,6 +11,7 @@ data class UserEntity(
     val name: String,
     val email: String,
     val password: String,
+    val isLogged: Boolean = false,
 )
 
 fun UserEntity.mapToDomain(): User {
@@ -19,13 +20,5 @@ fun UserEntity.mapToDomain(): User {
         name = name,
         email = email,
         password = password,
-    )
-}
-
-fun mapEntityFromDomain(user: User): UserEntity {
-    return UserEntity(
-        name = user.name,
-        email = user.email,
-        password = user.password,
     )
 }

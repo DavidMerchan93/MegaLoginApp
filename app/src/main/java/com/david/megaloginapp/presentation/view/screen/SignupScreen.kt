@@ -1,5 +1,6 @@
 package com.david.megaloginapp.presentation.view.screen
 
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -39,12 +40,15 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterScreen(onContinueToHome: (userId: Int) -> Unit) {
+    val backDispatcher = requireNotNull(LocalOnBackPressedDispatcherOwner.current)
+        .onBackPressedDispatcher
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {},
                 navigationIcon = {
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = { backDispatcher.onBackPressed() }) {
                         Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
                     }
                 },

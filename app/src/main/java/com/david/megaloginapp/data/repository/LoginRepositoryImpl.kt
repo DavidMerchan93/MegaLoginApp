@@ -21,7 +21,10 @@ class LoginRepositoryImpl @Inject constructor(
                 null
             }
 
-            user != null -> user.mapToDomain()
+            user != null -> {
+                userDao.updateUserLogin(email, true)
+                user.mapToDomain()
+            }
 
             else -> null
         }

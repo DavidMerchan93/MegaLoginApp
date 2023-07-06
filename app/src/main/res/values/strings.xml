@@ -32,8 +32,23 @@
     <string name="register.error.register_user">Error al registar el usuario, por favor intenta mas tarde.</string>
     <string name="register.message.success_register_user">Felicitaciones!!!!, registro completado con exíto.</string>
 
+    <!-- Forgot Password -->
+    <string name="forgot_password.title.screen">Recuperar la contraseña</string>
+    <string name="forgot_password.hint.email">Correo electronico</string>
+    <string name="forgot_password.button.continue">Continuar</string>
+    <string name="forgot_password.hint.password">Contraseña</string>
+    <string name="forgot_password.hint.repeat_password">Repetir contraseña</string>
+    <string name="forgot_password.button.change_password">Cambiar contraseña</string>
+    <string name="forgot_password.error.require_email">Debes ingresar un correo</string>
+    <string name="forgot_password.error.require_password">Debes ingresar una contraseña</string>
+    <string name="forgot_password.error.password_not_match">Las contraseñas no coinciden</string>
+    <string name="forgot_password.error.title_error">Algo salio mal</string>
+    <string name="forgot_password.error.change_password">Error al cambiar la contraseña, por favor intenta mas tarde.</string>
+    <string name="forgot_password.message.success_change_password">Cambio realizado con exíto.</string>
+
     <!-- Home -->
     <string name="home.title.welcome">Hola!!!, Felicitaciones por llegar hasta acá.</string>
+    <string name="home.button.logout">Cerrar sesión</string>
 
     <!-- General -->
     <string name="button.ok">Entendido</string>

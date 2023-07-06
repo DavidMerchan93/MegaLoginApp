@@ -14,4 +14,16 @@ interface UserDao {
 
     @Query("SELECT * FROM user WHERE email=:email AND password=:password")
     fun getUserByEmailAndPassword(email: String, password: String): UserEntity?
+
+    @Query("SELECT * FROM user WHERE email=:email")
+    fun getUserByEmail(email: String): UserEntity?
+
+    @Query("SELECT * FROM user WHERE isLogged = 1")
+    fun getUserLogged(): UserEntity?
+
+    @Query("UPDATE user SET password=:password WHERE email=:email")
+    fun changePassword(email: String, password: String)
+
+    @Query("UPDATE user SET isLogged=:isLogged WHERE email=:email")
+    fun updateUserLogin(email: String, isLogged: Boolean)
 }
