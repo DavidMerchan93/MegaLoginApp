@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun RegisterScreen() {
+fun ForgotPasswordScreen() {
     Box(modifier = Modifier.fillMaxSize()) {
-        Text(text = "RegisterScreen")
+        Text(text = "ForgotPasswordScreen")
     }
 }

@@ -6,34 +6,25 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
 import com.david.megaloginapp.presentation.theme.MegaLoginAppTheme
-import com.david.megaloginapp.presentation.view.screen.LoginScreen
+import com.david.megaloginapp.presentation.view.navigation.NavigationApp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LoginContent {
-                LoginScreen(
-                    onLogin = {},
-                    onRegister = {},
-                    onForgotPassword = {},
-                )
-            }
-        }
-    }
-}
+            val navController = rememberNavController()
 
-@Composable
-fun LoginContent(content: @Composable () -> Unit) {
-    MegaLoginAppTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background,
-        ) {
-            content()
+            MegaLoginAppTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background,
+                ) {
+                    NavigationApp(navController)
+                }
+            }
         }
     }
 }

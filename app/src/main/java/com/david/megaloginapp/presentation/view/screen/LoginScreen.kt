@@ -1,7 +1,5 @@
 package com.david.megaloginapp.presentation.view.screen
 
-import android.content.Context
-import android.net.Uri
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -34,23 +32,18 @@ import com.david.megaloginapp.presentation.view.common.TextInput
 import com.david.megaloginapp.presentation.view.common.ViewAnimation
 import com.david.megaloginapp.presentation.view.common.buildExoplayer
 import com.david.megaloginapp.presentation.view.common.buildPlayerView
+import com.david.megaloginapp.presentation.view.common.getVideoUri
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.navigationBarsWithImePadding
 
-private fun getVideoUri(context: Context): Uri {
-    val videoUri = "android.resource://${context.packageName}/${R.raw.background_video_space}"
-    return Uri.parse(videoUri)
-}
-
 @Composable
 fun LoginScreen(
-    onLogin: () -> Unit,
+    onLogin: (userName: String) -> Unit,
     onForgotPassword: () -> Unit,
     onRegister: () -> Unit,
 ) {
     val context = LocalContext.current
-
-    val exoplayer = remember { context.buildExoplayer(getVideoUri(context)) }
+    val exoplayer = remember { context.buildExoplayer(context.getVideoUri()) }
 
     DisposableEffect(
         AndroidView(factory = {
@@ -89,7 +82,9 @@ fun LoginScreen(
             TextInput(InputType.Password)
             SimpleButton(
                 label = stringResource(id = R.string.login_button_login),
-                onClick = onLogin,
+                onClick = {
+                    onLogin("David")
+                },
             )
             Text(
                 modifier = Modifier.clickable { onForgotPassword() },

@@ -10,6 +10,7 @@ import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
+import com.david.megaloginapp.R
 
 @androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 fun Context.buildExoplayer(uri: Uri) = ExoPlayer.Builder(this).build().apply {
@@ -27,4 +28,9 @@ fun Context.buildPlayerView(exoPlayer: ExoPlayer) = PlayerView(this).apply {
     resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
     player = exoPlayer
     layoutParams = FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+}
+
+fun Context.getVideoUri(): Uri {
+    val videoUri = "android.resource://${this.packageName}/${R.raw.background_video_space}"
+    return Uri.parse(videoUri)
 }
