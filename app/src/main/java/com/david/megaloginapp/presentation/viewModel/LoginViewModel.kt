@@ -5,9 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.david.megaloginapp.domain.error.common.UserException
+import com.david.megaloginapp.domain.error.login.LoginEmailException
+import com.david.megaloginapp.domain.error.login.LoginPasswordException
 import com.david.megaloginapp.domain.useCase.OnLoginUseCase
 import com.david.megaloginapp.presentation.state.LoginState
-import com.david.megaloginapp.presentation.view.common.isValidEmail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
@@ -26,28 +28,26 @@ class LoginViewModel @Inject constructor(
     fun login(email: String, password: String) {
         loginState = LoginState(isLoading = true)
 
-        if (isValidFields(email, password)) {
-            onLoginUseCase(email, password).catch {
-                loginState = LoginState(errorUserNotFound = LoginState.LoginErrors.USER_NOT_FOUND)
-            }.map { user ->
-                loginState = LoginState(userLoggedSuccess = user)
-            }.flowOn(Dispatchers.IO).launchIn(viewModelScope)
-        }
+        onLoginUseCase(email, password).catch { exception ->
+            processException(exception)
+        }.map { user ->
+            loginState = LoginState(userLoggedSuccess = user)
+        }.flowOn(Dispatchers.IO).launchIn(viewModelScope)
     }
 
-    private fun isValidFields(email: String, password: String): Boolean {
-        return when {
-            (email.isEmpty() || email.isValidEmail().not()) -> {
+    private fun processException(exception: Throwable) {
+        when (exception) {
+            LoginEmailException -> {
                 loginState = LoginState(errorInvalidEmail = LoginState.LoginErrors.EMAIL_FORMAT)
-                false
             }
 
-            (password.isEmpty() || password.length < 5) -> {
+            LoginPasswordException -> {
                 loginState = LoginState(errorEmptyPassword = LoginState.LoginErrors.EMPTY_PASSWORD)
-                false
             }
 
-            else -> true
+            UserException -> {
+                loginState = LoginState(errorUserNotFound = LoginState.LoginErrors.USER_NOT_FOUND)
+            }
         }
     }
 }

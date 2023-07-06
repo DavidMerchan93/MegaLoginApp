@@ -17,6 +17,10 @@ class LoginRepositoryImpl @Inject constructor(
                 Constants.USER_SAMPLE
             }
 
+            email == Constants.EMAIL_ERROR -> {
+                null
+            }
+
             user != null -> user.mapToDomain()
 
             else -> null

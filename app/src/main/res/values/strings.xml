@@ -2,10 +2,12 @@
     <string name="app_name">MegaLoginApp</string>
 
     <!-- Login -->
-    <string name="login.title.success_login">Bienvenido de vuelta</string>
+    <string name="login.title.success_login">Bienvenido de vuelta!!!</string>
+    <string name="login.message.success_login">Nos alegra tenete de vuelta, bienvenido.</string>
     <string name="login.button.login">Iniciar sesion</string>
     <string name="login.button.register">¿No tienes una cuenta?, Registrate</string>
     <string name="login.button.forgot_password">Olvide mi contraseña</string>
+    <string name="login.button.continue">Continuar al home</string>
     <string name="login.hint.email">Correo</string>
     <string name="login.hint.password">Contraseña</string>
     <string name="login.error.invalid_email">Ingresa un correo electronico valido.</string>

@@ -65,21 +65,9 @@ fun RegisterView(
     val registerState = registerViewModel.registerState
 
     ModalBottomDialog(
-        iconAnimated = if (registerState.successRegister != null) {
-            R.raw.congrats
-        } else {
-            null
-        },
-        title = if (registerState.errorUser == RegisterState.Errors.USER) {
-            R.string.register_error_title_error
-        } else {
-            null
-        },
-        detail = if (registerState.errorUser == RegisterState.Errors.USER) {
-            R.string.register_error_register_user
-        } else {
-            R.string.register_message_success_register_user
-        },
+        iconAnimated = getIconModalRegister(registerState),
+        title = getTitleModalRegister(registerState),
+        detail = getDetailModalRegister(registerState),
         buttonTitle = R.string.register_button_continue,
         isError = registerState.errorUser == RegisterState.Errors.USER,
         buttonAction = {
@@ -177,5 +165,29 @@ fun RegisterDetail(
                 onRegister(fullName, email, password, confirmPassword)
             },
         )
+    }
+}
+
+private fun getIconModalRegister(registerState: RegisterState): Int? {
+    return if (registerState.successRegister != null) {
+        R.raw.congrats
+    } else {
+        null
+    }
+}
+
+private fun getTitleModalRegister(registerState: RegisterState): Int? {
+    return if (registerState.errorUser == RegisterState.Errors.USER) {
+        R.string.register_error_title_error
+    } else {
+        null
+    }
+}
+
+private fun getDetailModalRegister(registerState: RegisterState): Int {
+    return if (registerState.errorUser == RegisterState.Errors.USER) {
+        R.string.register_error_register_user
+    } else {
+        R.string.register_message_success_register_user
     }
 }
