@@ -16,6 +16,7 @@
     <!-- Register -->
     <string name="register.title.welcome">Bienvenido a bordo!!!</string>
     <string name="register.button.register">Registrarme</string>
+    <string name="register.button.continue">Continuar al home</string>
     <string name="register.hint.full_name">Nombre completo *</string>
     <string name="register.hint.email">Correo electronico *</string>
     <string name="register.hint.password">Contraseña *</string>
@@ -25,9 +26,14 @@
     <string name="register.error.require_email">Debes ingresar un correo</string>
     <string name="register.error.require_password">Debes ingresar una contraseña</string>
     <string name="register.error.password_not_match">Las contraseñas no coinciden</string>
+    <string name="register.error.title_error">Algo salio mal</string>
     <string name="register.error.register_user">Error al registar el usuario, por favor intenta mas tarde.</string>
+    <string name="register.message.success_register_user">Felicitaciones!!!!, registro completado con exíto.</string>
 
     <!-- Home -->
     <string name="home.title.welcome">Hola!!!, Felicitaciones por llegar hasta acá.</string>
+
+    <!-- General -->
+    <string name="button.ok">Entendido</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.david.megaloginapp.data.repository
 
+import com.david.megaloginapp.data.common.Constants
 import com.david.megaloginapp.data.local.dao.UserDao
 import com.david.megaloginapp.data.local.entity.UserEntity
 import com.david.megaloginapp.data.local.entity.mapToDomain
@@ -15,7 +16,11 @@ class RegisterRepositoryImpl @Inject constructor(
     }
 
     override fun getUserByEmail(email: String, password: String): User? {
-        val user = userDao.getUserByEmailAndPassword(email, password)
-        return user?.mapToDomain()
+        return if (email != Constants.EMAIL_ERROR) {
+            val user = userDao.getUserByEmailAndPassword(email, password)
+            user?.mapToDomain()
+        } else {
+            null
+        }
     }
 }

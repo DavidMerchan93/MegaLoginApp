@@ -10,4 +10,6 @@ object Constants {
         email = "usuario@prueba.com",
         password = "megalogin",
     )
+
+    const val EMAIL_ERROR = "error@error.com"
 }

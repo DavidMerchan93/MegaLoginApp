@@ -41,7 +41,11 @@ private fun NavGraphBuilder.loginNavigation(navController: NavController) {
 
 private fun NavGraphBuilder.registerNavigation(navController: NavController) {
     composable(NavigationRoutes.Register) {
-        RegisterScreen()
+        RegisterScreen(
+            onContinueToHome = { userId ->
+                navController.navigate(NavigationRoutes.Home.createRoute(userId))
+            },
+        )
     }
 }
 
