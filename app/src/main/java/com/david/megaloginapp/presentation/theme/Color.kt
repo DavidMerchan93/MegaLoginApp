@@ -2,12 +2,21 @@ package com.david.megaloginapp.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+val PrimaryLight = Color(0xFF9c413e)
+val SecondaryLight = Color(0xFF775654)
+val TertiaryLight = Color(0xFF735b2e)
+val SurfaceLight = Color(0xFF201a1a)
+val OnSurfaceLight = Color(0xFFfffbff)
+val BackgroundLight = Color(0xFF201a1a)
+val OnBackgroundLight = Color(0xFFfffbff)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val PrimaryDark = Color(0xFFffb3ae)
+val SecondaryDark = Color(0xFFe7bdb9)
+val TertiaryDark = Color(0xFFe2c28c)
+val SurfaceDark = Color(0xFF201a1a)
+val OnSurfaceDark = Color(0xFFede0de)
+val BackgroundDark = Color(0xFF201a1a)
+val OnBackgroundDark = Color(0xFFede0de)
 
+val Black = Color(0xFF000000)
 val White = Color(0xFFFFFFFF)

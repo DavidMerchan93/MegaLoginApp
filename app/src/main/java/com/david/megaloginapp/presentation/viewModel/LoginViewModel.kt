@@ -26,11 +26,13 @@ class LoginViewModel @Inject constructor(
     fun login(email: String, password: String) {
         loginState = LoginState(isLoading = true)
 
-        onLoginUserUseCase(email, password).catch {
-            loginState = LoginState(errorUserNotFound = LoginState.LoginErrors.USER_NOT_FOUND)
-        }.map { user ->
-            loginState = LoginState(userLoggedSuccess = user)
-        }.flowOn(Dispatchers.IO).launchIn(viewModelScope)
+        if (isValidFields(email, password)) {
+            onLoginUserUseCase(email, password).catch {
+                loginState = LoginState(errorUserNotFound = LoginState.LoginErrors.USER_NOT_FOUND)
+            }.map { user ->
+                loginState = LoginState(userLoggedSuccess = user)
+            }.flowOn(Dispatchers.IO).launchIn(viewModelScope)
+        }
     }
 
     private fun isValidFields(email: String, password: String): Boolean {

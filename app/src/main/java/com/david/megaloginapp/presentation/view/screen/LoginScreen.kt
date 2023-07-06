@@ -94,22 +94,27 @@ fun LoginScreen(
                 value = emailValue,
                 inputType = InputType.Email,
                 messageError = loginState.errorInvalidEmail?.message,
+                isEnabled = loginState.isLoading.not(),
                 onChangeValue = { emailValue = it },
             )
             TextInput(
                 value = passwordValue,
                 inputType = InputType.Password,
                 messageError = loginState.errorEmptyPassword?.message,
+                isEnabled = loginState.isLoading.not(),
                 onChangeValue = { passwordValue = it },
             )
             SimpleButton(
                 label = stringResource(id = R.string.login_button_login),
+                isLoading = loginState.isLoading,
                 onClick = {
                     loginViewModel.login(emailValue, passwordValue)
                 },
             )
             Text(
-                modifier = Modifier.clickable { onForgotPassword() },
+                modifier = Modifier
+                    .padding(top = dimensionResource(id = R.dimen.dimen_16dp))
+                    .clickable { onForgotPassword() },
                 text = stringResource(id = R.string.login_button_forgot_password),
                 color = MaterialTheme.colorScheme.onBackground,
             )

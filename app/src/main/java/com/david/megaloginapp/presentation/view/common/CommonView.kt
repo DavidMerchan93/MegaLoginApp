@@ -7,12 +7,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.sp
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
@@ -33,6 +36,7 @@ fun TextInput(
     value: String,
     inputType: InputType,
     @StringRes messageError: Int?,
+    isEnabled: Boolean = false,
     onChangeValue: (value: String) -> Unit,
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
@@ -56,6 +60,7 @@ fun TextInput(
                 unfocusedIndicatorColor = Color.Transparent,
             ),
             isError = messageError != null,
+            enabled = isEnabled,
         )
         if (messageError != null) {
             Text(
@@ -68,12 +73,28 @@ fun TextInput(
 }
 
 @Composable
-fun SimpleButton(label: String, onClick: () -> Unit) {
+fun SimpleButton(
+    label: String,
+    isLoading: Boolean = false,
+    onClick: () -> Unit,
+) {
     Button(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(dimensionResource(id = R.dimen.dimen_40dp)),
         onClick = onClick,
     ) {
-        Text(text = label)
+        if (isLoading) {
+            CircularProgressIndicator(
+                modifier = Modifier.size(dimensionResource(id = R.dimen.dimen_24dp)),
+                color = Color.White,
+            )
+        } else {
+            Text(
+                text = label,
+                fontSize = 18.sp,
+            )
+        }
     }
 }
 
