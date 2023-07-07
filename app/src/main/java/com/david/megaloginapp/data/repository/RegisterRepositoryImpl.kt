@@ -12,7 +12,13 @@ class RegisterRepositoryImpl @Inject constructor(
     private val userDao: UserDao,
 ) : RegisterRepository {
     override fun registerUser(fullName: String, email: String, password: String) {
-        userDao.insert(UserEntity(name = fullName, email = email, password = password))
+        userDao.insert(
+            UserEntity(
+                name = fullName,
+                email = email,
+                password = password,
+            ),
+        )
     }
 
     override fun getUserByEmail(email: String, password: String): User? {

@@ -3,24 +3,26 @@ package com.david.megaloginapp.data.repository
 import com.david.megaloginapp.data.local.dao.UserDao
 import com.david.megaloginapp.data.local.entity.UserEntity
 import com.david.megaloginapp.domain.model.User
-import com.david.megaloginapp.domain.repository.StartAppRepository
+import com.david.megaloginapp.domain.repository.HomeRepository
 import io.mockk.confirmVerified
 import io.mockk.every
+import io.mockk.just
 import io.mockk.mockk
+import io.mockk.runs
 import io.mockk.verify
 import junit.framework.TestCase.assertEquals
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-internal class StartAppRepositoryImplTest {
+class HomeRepositoryImplTest {
 
     private val userDao: UserDao = mockk()
-    private lateinit var startAppRepository: StartAppRepository
+    private lateinit var homeRepository: HomeRepository
 
     @Before
     fun setUp() {
-        startAppRepository = StartAppRepositoryImpl(userDao)
+        homeRepository = HomeRepositoryImpl(userDao)
     }
 
     @After
@@ -29,12 +31,12 @@ internal class StartAppRepositoryImplTest {
     }
 
     @Test
-    fun getCurrentUserLogged() {
+    fun getUserData() {
         val userEntity: UserEntity = mockk()
 
         // Preparation
         every {
-            userDao.getUserLogged()
+            userDao.getUserById(1)
         } returns userEntity
 
         every { userEntity.id } returns 1
@@ -43,11 +45,11 @@ internal class StartAppRepositoryImplTest {
         every { userEntity.password } returns "password"
 
         // Execution
-        val user = startAppRepository.getCurrentUserLogged()
+        val result = homeRepository.getUserData(1)
 
         // Verification
         assertEquals(
-            user,
+            result,
             User(
                 id = 1,
                 name = "name",
@@ -56,7 +58,7 @@ internal class StartAppRepositoryImplTest {
             ),
         )
         verify {
-            userDao.getUserLogged()
+            userDao.getUserById(1)
             userEntity.id
             userEntity.name
             userEntity.email
@@ -64,5 +66,39 @@ internal class StartAppRepositoryImplTest {
         }
 
         confirmVerified(userEntity)
+    }
+
+    @Test
+    fun getUserDataNull() {
+        // Preparation
+        every {
+            userDao.getUserById(1)
+        } returns null
+
+        // Execution
+        val result = homeRepository.getUserData(1)
+
+        // Verification
+        assertEquals(
+            result,
+            null,
+        )
+        verify {
+            userDao.getUserById(1)
+        }
+    }
+
+    @Test
+    fun logout() {
+        // Preparation
+        every { userDao.logout() } just runs
+
+        // Execution
+        homeRepository.logout()
+
+        // Verification
+        verify {
+            userDao.logout()
+        }
     }
 }
