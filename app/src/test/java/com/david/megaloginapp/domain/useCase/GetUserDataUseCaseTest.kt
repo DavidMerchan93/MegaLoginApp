@@ -2,33 +2,33 @@ package com.david.megaloginapp.domain.useCase
 
 import com.david.megaloginapp.domain.error.common.UserException
 import com.david.megaloginapp.domain.model.User
-import com.david.megaloginapp.domain.repository.StartAppRepository
+import com.david.megaloginapp.domain.repository.HomeRepository
 import io.mockk.confirmVerified
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
-class OnStartAppUseCaseTest {
+class GetUserDataUseCaseTest {
 
-    private val startAppRepository: StartAppRepository = mockk()
+    private val homeRepository: HomeRepository = mockk()
 
-    private lateinit var onStartAppUseCase: OnStartAppUseCase
+    private lateinit var getUserDataUseCase: GetUserDataUseCase
 
     @Before
     fun setUp() {
-        onStartAppUseCase = OnStartAppUseCase(startAppRepository)
+        getUserDataUseCase = GetUserDataUseCase(homeRepository)
     }
 
     @After
     fun tearDown() {
-        confirmVerified(startAppRepository)
+        confirmVerified(homeRepository)
     }
 
     @Test
@@ -37,17 +37,17 @@ class OnStartAppUseCaseTest {
 
         // Preparation
         every {
-            startAppRepository.getCurrentUserLogged()
+            homeRepository.getUserData(1)
         } returns user
 
         // Execution
-        onStartAppUseCase.invoke().collect {
+        getUserDataUseCase(1).collect {
             assertEquals(it, user)
         }
 
         // Verification
         verify {
-            startAppRepository.getCurrentUserLogged()
+            homeRepository.getUserData(1)
             user.equals(any())
         }
 
@@ -58,17 +58,17 @@ class OnStartAppUseCaseTest {
     fun invokeError() = runBlocking {
         // Preparation
         every {
-            startAppRepository.getCurrentUserLogged()
+            homeRepository.getUserData(1)
         } returns null
 
         // Execution
-        onStartAppUseCase.invoke().catch {
+        getUserDataUseCase(1).catch {
             assertEquals(it, UserException)
         }.collect()
 
         // Verification
         verify {
-            startAppRepository.getCurrentUserLogged()
+            homeRepository.getUserData(1)
         }
     }
 }
