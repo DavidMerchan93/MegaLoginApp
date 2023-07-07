@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,14 +29,16 @@ class HomeViewModel @Inject constructor(
     var userHomeState by mutableStateOf(UserHomeState())
         private set
 
+    var userLogoutState by mutableStateOf(false)
+        private set
+
     init {
         stateHandle.get<Int>(NavigationArgs.USER_ID.key)?.let { id ->
             getUserData(id)
         }
     }
 
-    fun getUserData(id: Int) {
-        userHomeState = UserHomeState(isLoading = true)
+    private fun getUserData(id: Int) {
         getUserDataUseCase(id).catch {
             userHomeState = UserHomeState(userData = null)
         }.map { user ->
@@ -44,11 +47,15 @@ class HomeViewModel @Inject constructor(
     }
 
     fun logout() {
-        userHomeState = UserHomeState(isLoading = true)
         onLogoutUseCase().catch {
-            userHomeState = UserHomeState(isLogout = false)
+            userLogoutState = false
         }.map {
-            userHomeState = UserHomeState(isLogout = true)
+            userLogoutState = true
+        }.onStart {
+            userHomeState = userHomeState.copy(
+                isLoading = true,
+                userData = null,
+            )
         }.flowOn(Dispatchers.IO).launchIn(viewModelScope)
     }
 }

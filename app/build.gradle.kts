@@ -58,7 +58,8 @@ android {
 
 dependencies {
     val roomVersion = "2.4.2"
-    val exoplayerVersion = "2.19.0"
+    val media3Version = "1.1.0"
+    val mockkVersion = "1.13.5"
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.44")
@@ -76,10 +77,15 @@ dependencies {
     // Lottie Animation
     implementation("com.airbnb.android:lottie-compose:4.2.0")
 
-    // Exoplayer
-    implementation("androidx.media3:media3-exoplayer:1.1.0")
-    implementation("androidx.media3:media3-ui:1.1.0")
+    // Media3
+    implementation("androidx.media3:media3-exoplayer:$media3Version")
+    implementation("androidx.media3:media3-ui:$media3Version")
 
+    // Mockk
+    testImplementation("io.mockk:mockk:$mockkVersion")
+    androidTestImplementation("io.mockk:mockk-android:$mockkVersion")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
     implementation("com.google.accompanist:accompanist-insets:0.23.1")
     implementation("androidx.core:core-ktx:1.10.1")
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
@@ -94,9 +100,7 @@ dependencies {
     implementation("androidx.compose.material:material:1.4.3")
 
     testImplementation("junit:junit:4.13.2")
-
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation(platform("androidx.compose:compose-bom:2022.10.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")

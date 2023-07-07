@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,12 +27,12 @@ class LoginViewModel @Inject constructor(
         private set
 
     fun login(email: String, password: String) {
-        loginState = LoginState(isLoading = true)
-
         onLoginUseCase(email, password).catch { exception ->
             processException(exception)
         }.map { user ->
             loginState = LoginState(userLoggedSuccess = user)
+        }.onStart {
+            loginState = loginState.copy(isLoading = true, userLoggedSuccess = null)
         }.flowOn(Dispatchers.IO).launchIn(viewModelScope)
     }
 

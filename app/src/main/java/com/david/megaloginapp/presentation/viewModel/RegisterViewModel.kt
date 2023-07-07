@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.david.megaloginapp.domain.error.common.UserException
 import com.david.megaloginapp.domain.error.register.EmailException
 import com.david.megaloginapp.domain.error.register.FullNameException
 import com.david.megaloginapp.domain.error.register.PasswordException
@@ -16,6 +17,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,34 +34,38 @@ class RegisterViewModel @Inject constructor(
         password: String,
         confirmPassword: String,
     ) {
-        registerState = RegisterState(isLoading = true)
         onRegisterUseCase(fullName, email, password, confirmPassword).catch { exception ->
             processErrors(exception)
         }.map { user ->
-            registerState = RegisterState(successRegister = user)
+            registerState = registerState.copy(
+                isLoading = false,
+                successRegister = user,
+            )
+        }.onStart {
+            registerState = registerState.copy(isLoading = true, successRegister = null)
         }.flowOn(Dispatchers.IO).launchIn(viewModelScope)
     }
 
     private fun processErrors(exception: Throwable) {
-        registerState = when (exception) {
+        when (exception) {
             FullNameException -> {
-                RegisterState(errorFullName = RegisterState.Errors.FULL_NAME)
+                registerState = RegisterState(errorFullName = RegisterState.Errors.FULL_NAME)
             }
 
             EmailException -> {
-                RegisterState(errorEmail = RegisterState.Errors.EMAIL)
+                registerState = RegisterState(errorEmail = RegisterState.Errors.EMAIL)
             }
 
             is PasswordException -> {
-                if (exception.isEmpty) {
+                registerState = if (exception.isEmpty) {
                     RegisterState(errorPassword = RegisterState.Errors.PASSWORD)
                 } else {
                     RegisterState(errorRepeatPassword = RegisterState.Errors.REPEAT_PASSWORD)
                 }
             }
 
-            else -> {
-                RegisterState(errorUser = RegisterState.Errors.USER)
+            UserException -> {
+                registerState = RegisterState(errorUser = RegisterState.Errors.USER)
             }
         }
     }

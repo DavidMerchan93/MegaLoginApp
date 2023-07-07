@@ -23,9 +23,10 @@ import com.david.megaloginapp.presentation.viewModel.HomeViewModel
 @Composable
 fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel(), onLogout: () -> Unit) {
     val userHomeState = homeViewModel.userHomeState
+    val userLogoutState = homeViewModel.userLogoutState
 
-    LaunchedEffect(userHomeState.isLogout) {
-        if (userHomeState.isLogout) {
+    LaunchedEffect(userLogoutState) {
+        if (userLogoutState) {
             onLogout()
         }
     }

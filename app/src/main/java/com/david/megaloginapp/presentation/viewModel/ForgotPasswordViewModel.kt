@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,13 +29,18 @@ class ForgotPasswordViewModel @Inject constructor(
         private set
 
     fun changePassword(email: String, password: String, confirmPassword: String) {
-        changePasswordState = ForgotPasswordState(isLoading = true)
         onChangePasswordUseCase(email, password, confirmPassword).catch { exception ->
             processErrors(exception)
         }.map { result ->
             if (result) {
                 changePasswordState = ForgotPasswordState(isSuccessChange = true)
+            } else {
+                changePasswordState =
+                    ForgotPasswordState(errorUser = ForgotPasswordState.Error.USER_NOT_FOUND)
             }
+        }.onStart {
+            changePasswordState =
+                changePasswordState.copy(isLoading = true, isSuccessChange = false)
         }.flowOn(Dispatchers.IO).launchIn(viewModelScope)
     }
 
