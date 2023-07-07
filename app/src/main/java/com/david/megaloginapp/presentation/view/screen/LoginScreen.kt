@@ -30,14 +30,14 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.david.megaloginapp.R
 import com.david.megaloginapp.presentation.state.LoginState
+import com.david.megaloginapp.presentation.utils.buildExoplayer
+import com.david.megaloginapp.presentation.utils.buildPlayerView
+import com.david.megaloginapp.presentation.utils.getVideoUri
 import com.david.megaloginapp.presentation.view.common.InputType
 import com.david.megaloginapp.presentation.view.common.ModalBottomDialog
 import com.david.megaloginapp.presentation.view.common.SimpleButton
 import com.david.megaloginapp.presentation.view.common.TextInput
 import com.david.megaloginapp.presentation.view.common.ViewAnimation
-import com.david.megaloginapp.presentation.view.common.buildExoplayer
-import com.david.megaloginapp.presentation.view.common.buildPlayerView
-import com.david.megaloginapp.presentation.view.common.getVideoUri
 import com.david.megaloginapp.presentation.viewModel.LoginViewModel
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.navigationBarsWithImePadding

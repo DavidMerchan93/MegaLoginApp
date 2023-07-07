@@ -5,7 +5,7 @@ import com.david.megaloginapp.domain.error.login.LoginEmailException
 import com.david.megaloginapp.domain.error.login.LoginPasswordException
 import com.david.megaloginapp.domain.model.User
 import com.david.megaloginapp.domain.repository.LoginRepository
-import com.david.megaloginapp.presentation.view.common.isValidEmail
+import com.david.megaloginapp.presentation.utils.isValidEmail
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

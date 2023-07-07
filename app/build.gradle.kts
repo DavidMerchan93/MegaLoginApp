@@ -17,9 +17,13 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.david.megaloginapp.CustomTestRunner"
+
         vectorDrawables {
             useSupportLibrary = true
+        }
+        testOptions {
+            execution = "ANDROIDX_TEST_ORCHESTRATOR"
         }
     }
 
@@ -49,9 +53,14 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.1"
     }
-    packagingOptions {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+    packaging {
+        resources.excludes.apply {
+            add("META-INF/LICENSE-notice.md")
+            add("META-INF/LICENSE.md")
+            add("META-INF/LICENSE")
+            add("META-INF/*.properties")
+            add("META-INF/AL2.0")
+            add("META-INF/LGPL2.1")
         }
     }
 }
@@ -65,6 +74,11 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.44")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
+
+    // Hilt Tests
+    kaptTest("com.google.dagger:hilt-android-compiler:2.44")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.44")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.44")
 
     // Room
     implementation("androidx.room:room-runtime:$roomVersion")
@@ -105,4 +119,7 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    androidTestImplementation("androidx.test:runner:1.5.2")
+    androidTestUtil("androidx.test:orchestrator:1.4.2")
 }

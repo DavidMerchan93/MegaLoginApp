@@ -6,7 +6,7 @@ import com.david.megaloginapp.domain.error.register.FullNameException
 import com.david.megaloginapp.domain.error.register.PasswordException
 import com.david.megaloginapp.domain.model.User
 import com.david.megaloginapp.domain.repository.RegisterRepository
-import com.david.megaloginapp.presentation.view.common.isValidEmail
+import com.david.megaloginapp.presentation.utils.isValidEmail
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

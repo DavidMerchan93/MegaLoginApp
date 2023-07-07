@@ -1,4 +1,4 @@
-package com.david.megaloginapp.presentation.view.common
+package com.david.megaloginapp.presentation.utils
 
 import android.content.Context
 import android.net.Uri

@@ -5,7 +5,7 @@ import com.david.megaloginapp.domain.error.forgotPassword.ForgotConfirmPasswordE
 import com.david.megaloginapp.domain.error.forgotPassword.ForgotEmailException
 import com.david.megaloginapp.domain.error.forgotPassword.ForgotPasswordException
 import com.david.megaloginapp.domain.repository.ForgotPasswordRepository
-import com.david.megaloginapp.presentation.view.common.isValidEmail
+import com.david.megaloginapp.presentation.utils.isValidEmail
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

@@ -1,4 +1,4 @@
-package com.david.megaloginapp.presentation.view.common
+package com.david.megaloginapp.presentation.utils
 
 import java.util.regex.Pattern
 
