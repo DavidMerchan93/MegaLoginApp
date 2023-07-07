@@ -1,10 +1,13 @@
-# Descripción del proyecto: App de Login Android
+# MegaLoginApp Android
 
-Este proyecto de aplicación Android es un ejemplo de una app de inicio de sesión que consta de varias pantallas, incluyendo la vista de inicio de sesión, registro, recuperación de contraseña y la pantalla de inicio.
+Este proyecto de Android es un ejemplo de una app de inicio de sesión que consta de varias pantallas, incluyendo la vista de inicio de sesión, registro, recuperación de contraseña y la pantalla de inicio.
 
 ## Características y tecnologías utilizadas:
 
-- **Arquitectura Clean**: El proyecto sigue los principios SOLID y utiliza la arquitectura Clean para una estructura de código modular y mantenible.
+- **Clean Architecture**: El proyecto sigue los principios SOLID y utiliza Clean Architecture para una estructura de código modular y mantenible, se compone principalmente de 3 capas.
+  - Capa de datos (data): En esta capa se encontraria todo lo relaciona a la fuente de datos, en este caso la conexion con la base de datos local (Room) para almacenar la informacion de los usuario. 
+  - Capa de dominio (domain): En esta capa alojamos toda la logica de negocio principalmente contenida en los casos de uso.
+  - Capa de presentacion (presentation): En esta capa tenemos todos los elementos visuales que se muestran en la UI, en este caso diseñada con Jetpack Compose.  
 - **MVVM**: Se implementa el patrón de arquitectura Modelo-Vista-VistaModelo para una separación clara de responsabilidades y un flujo de datos eficiente.
 - **Room**: Se utiliza la biblioteca Room para el almacenamiento local de datos, proporcionando una capa de abstracción para interactuar con la base de datos SQLite.
 - **Compose**: La interfaz de usuario se ha desarrollado utilizando Jetpack Compose, el kit de herramientas moderno y declarativo para la creación de interfaces de usuario en Android.
@@ -16,8 +19,8 @@ Este proyecto de aplicación Android es un ejemplo de una app de inicio de sesi�
 
 ## Requisitos del proyecto:
 
-- Android Studio 4.0 o superior.
-- Dispositivo o emulador con Android 5.0 (API nivel 21) o superior.
+- Android Studio Flamingo.
+- Dispositivo o emulador con Android 7.0 (API nivel 24) o superior.
 
 ## Instrucciones de instalación y ejecución:
 
@@ -29,15 +32,27 @@ Este proyecto de aplicación Android es un ejemplo de una app de inicio de sesi�
 6. Haz clic en el botón "Ejecutar" en Android Studio y selecciona tu dispositivo/emulador.
 7. La app se instalará y se ejecutará en tu dispositivo/emulador.
 
-## Contribuciones:
+## Como probar:
 
-¡Las contribuciones son bienvenidas! Si deseas contribuir a este proyecto, sigue estos pasos:
+Si bien en la aplicacion se puede crear una cuenta para realizar las respectivas pruebas, tambien se crearon unos objetos de prueba.
 
-1. Realiza un fork de este repositorio.
-2. Crea una rama con una descripción clara de la funcionalidad que implementarás o el problema que resolverás.
-3. Realiza los cambios necesarios en tu rama.
-4. Envía una pull request a este repositorio y describe detalladamente los cambios que has realizado.
-5. Espera a que tu pull request sea revisada y fusionada.
+- Usuario de prueba:
+(id = 0
+name = "Usuario de prueba"
+email = "usuario@prueba.com"
+password = "megalogin")
+
+- Email de prueba para errores: error@error.com
+
+## Evidencias:
+<img src="https://github.com/DavidMerchan93/MegaLoginApp/assets/33288144/9db6c47b-d571-45a1-ba75-59700fbd11e6" width="200">
+<img src="https://github.com/DavidMerchan93/MegaLoginApp/assets/33288144/dc029c04-cd47-41df-962d-1b2ce17b88f2" width="200">
+<img src="https://github.com/DavidMerchan93/MegaLoginApp/assets/33288144/bd9c32bb-f0e6-42e7-8f0f-a851f94b36fa" width="200">
+<img src="https://github.com/DavidMerchan93/MegaLoginApp/assets/33288144/05c504f7-5883-4832-8f76-4c132390966d" width="200">
+
+<img src="https://github.com/DavidMerchan93/MegaLoginApp/assets/33288144/6adfc6dc-a02d-42d4-9dc5-722207bb3c4a" width="200">
+
+
 
 ## Licencia:
 
