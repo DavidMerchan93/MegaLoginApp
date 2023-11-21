@@ -1,7 +1,7 @@
 plugins {
-    id("com.android.application") version "8.0.2"
-    id("org.jetbrains.kotlin.android") version "1.8.0"
-    id("com.google.dagger.hilt.android") version "2.44"
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.hilt.android)
 
     kotlin("kapt")
 }
@@ -66,59 +66,61 @@ android {
 }
 
 dependencies {
-    val roomVersion = "2.4.2"
     val media3Version = "1.1.0"
     val mockkVersion = "1.13.5"
 
     // Hilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation(libs.dagger.hilt)
+    implementation(libs.hilt.navigation.compose)
+    kapt(libs.hilt.android.compiler)
 
     // Hilt Tests
-    kaptTest("com.google.dagger:hilt-android-compiler:2.44")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.44")
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.44")
+    kaptTest(libs.hilt.android.compiler)
+    kaptAndroidTest(libs.hilt.android.compiler)
+    androidTestImplementation(libs.hilt.android.testing)
 
     // Room
-    implementation("androidx.room:room-runtime:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
+    implementation(libs.room.runtime)
+    kapt(libs.room.compiler)
+    implementation(libs.room.ktx)
 
     // Navigation
-    implementation("androidx.navigation:navigation-compose:2.6.0")
+    implementation(libs.navigation.compose)
 
     // Lottie Animation
-    implementation("com.airbnb.android:lottie-compose:4.2.0")
+    implementation(libs.lottie.compose)
 
     // Media3
-    implementation("androidx.media3:media3-exoplayer:$media3Version")
-    implementation("androidx.media3:media3-ui:$media3Version")
+    implementation(libs.media3.exoplayer)
+    implementation(libs.media3.ui)
 
     // Mockk
-    testImplementation("io.mockk:mockk:$mockkVersion")
-    androidTestImplementation("io.mockk:mockk-android:$mockkVersion")
+    testImplementation(libs.mockk)
+    androidTestImplementation(libs.mockk.android)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
-    implementation("com.google.accompanist:accompanist-insets:0.23.1")
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation("androidx.activity:activity-compose:1.7.2")
-    implementation(platform("androidx.compose:compose-bom:2022.10.00"))
+    // Compose
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
     implementation("androidx.compose.material:material:1.4.3")
+    implementation(platform("androidx.compose:compose-bom:2022.10.00"))
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    androidTestImplementation(platform("androidx.compose:compose-bom:2022.10.00"))
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
+    implementation("com.google.accompanist:accompanist-insets:0.23.1")
+    implementation(libs.androidx.ktx)
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation("androidx.activity:activity-compose:1.7.2")
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2022.10.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     androidTestImplementation("androidx.test:runner:1.5.2")
     androidTestUtil("androidx.test:orchestrator:1.4.2")
