@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace = "com.david.megaloginapp"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.david.megaloginapp"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -66,9 +66,6 @@ android {
 }
 
 dependencies {
-    val media3Version = "1.1.0"
-    val mockkVersion = "1.13.5"
-
     // Hilt
     implementation(libs.dagger.hilt)
     implementation(libs.hilt.navigation.compose)
@@ -99,16 +96,14 @@ dependencies {
     androidTestImplementation(libs.mockk.android)
 
     // Compose
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.graphics)
+    implementation(libs.compose.tooling.preview)
+    implementation(libs.compose.material3)
     implementation("androidx.compose.material:material:1.4.3")
-    implementation(platform("androidx.compose:compose-bom:2022.10.00"))
-    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation(libs.compose.tooling)
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2022.10.00"))
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
     implementation("com.google.accompanist:accompanist-insets:0.23.1")

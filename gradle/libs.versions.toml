@@ -1,11 +1,15 @@
 [versions]
 ktx = "1.10.1"
-agp = "8.0.2"
-kotlin = "1.8.0"
+agp = "8.1.1"
+kotlin = "1.9.0"
 hilt = "2.44"
-roomVersion = "2.4.2"
+roomVersion = "2.6.0"
 media3Version = "1.1.0"
 mockkVersion = "1.13.5"
+compose = "1.5.1"
+composeCompiler = "1.5.3"
+composeMaterial = "1.1.2"
+androidx-activityCompose = "1.7.2"
 
 [libraries]
 androidx-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "ktx" }
@@ -22,9 +26,16 @@ media3-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", versi
 media3-ui = { group = "androidx.media3", name = "media3-ui", version.ref = "media3Version" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockkVersion" }
 mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockkVersion" }
+compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+compose-ui-graphics = { module = "androidx.compose.ui:ui-graphics", version.ref = "compose" }
+compose-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+compose-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
+compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

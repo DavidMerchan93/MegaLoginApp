@@ -13,4 +13,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "MegaLoginApp"
-include(":app")
+include(":androidApp")
+//include(":shared")
